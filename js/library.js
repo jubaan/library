@@ -46,3 +46,8 @@ function displayLibrary() {
     containerTable.appendChild(eachBook);
   });
 }
+
+//function showForm() {
+//  const newBookBtn = document.querySelector(#new_book);
+//  newBookBtn.onClick('')
+//}
