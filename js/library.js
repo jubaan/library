@@ -1,6 +1,5 @@
-'use strict';
-
-const myLibrary = [];
+const myLibrary = [{ author: 'julio', title: 'julio',  pages: 35, read: true }, { author: 'kitzia', title: 'kitzia', pages: 29, read: true }
+];
 
 function Book(author = 'anonymous', title, pages = 0, read = false) {
   this.author = author;
@@ -15,47 +14,39 @@ function addBookToLibrary(book) {
 }
 
 function askUserForBookInfo() {
-  let title = prompt("What's the book title?", '');
-  let author = prompt("Who's the book's author?", '');
-  let pages = +prompt('How many pages does it have?', '');
-  let read = confirm('Have you read this book? if you have click "OK" if not "Cancel"');
+  const title = prompt("What's the book title?", '');
+  const author = prompt("Who's the book's author?", '');
+  const pages = +prompt('How many pages does it have?', '');
+  const read = confirm('Have you read this book? if you have click "OK" if not "Cancel"'); // eslint-disable-line 
 
-  let book = new Book(author, title, pages, read);
+  const book = new Book(author, title, pages, read);
 
   addBookToLibrary(book);
 }
 
-let testFirst = new Book("anon", "new book", 49, true);
-
-let testSecond = new Book ("newauthor", "second", 6789, false);
-
-addBookToLibrary(testFirst);
-addBookToLibrary(testSecond);
-
-
-// function getBook() {
-//   let current_book = {};
-// }
-
 function generateBookHTML(book) {
-  // will take current book
-  // generate a tr and 
-  let row = document.createElement('tr');
-  // generate a td for each property value (loop for .. in ..)
-  for (let prop in book){
-    let column = document.createElement('td');
-    column.textContent = book[prop];
-    row.appendChild(column);
+  const row = document.createElement('tr');
+
+  for (const property in book) {
+    const isOwn = property in book;
+
+    if (isOwn) {
+      const column = document.createElement('td');
+
+      column.textContent = book[property];
+      row.appendChild(column);
     }
-  return row
-  // attach it to table as last child
+  }
+
+  return row;
 }
 
 function displayLibrary() {
-  let containerTable = document.querySelector('.library');
-  let eachBook = myLibrary.forEach (book => {
-    generateBookHTML(book)
-    containerTable.appendChild(eachBook)
+  const containerTable = document.querySelector('.library');
+
+  myLibrary.forEach(book => {
+    const eachBook = generateBookHTML(book);
+
+    containerTable.appendChild(eachBook);
   });
-  
 }
