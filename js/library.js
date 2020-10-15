@@ -8,9 +8,7 @@ function Book(author = "anonymous", title, pages = 0, read = false) {
     this.read = read;
 }
 
-let book = new Book({author: "whatever"})
-console.log(book);
-
-function addBookToLibrary() {
-  
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+  return myLibrary;
 }
