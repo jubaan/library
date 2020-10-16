@@ -62,6 +62,7 @@ function resetFields() {
   [...form.elements].splice(0, 3).forEach((element) => {
     element.value = null;
   });
+  // add unchecked attribute to radio buttons
 }
 
 function showForm() { // eslint-disable-line
@@ -114,6 +115,7 @@ function createBook() { // eslint-disable-line
     addBookToLibrary(book);
     addLastBook();
     hideForm();
+    resetFields();
   };
 }
 
