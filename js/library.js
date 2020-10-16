@@ -11,23 +11,14 @@ function Book(author = 'anonymous', title, pages = 0, read = false) {
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+
   return myLibrary;
-}
-
-function askUserForBookInfo() {
-  const title = prompt("What's the book title?", ''); // eslint-disable-line 
-  const author = prompt("Who's the book's author?", ''); // eslint-disable-line 
-  const pages = +prompt('How many pages does it have?', ''); // eslint-disable-line 
-  const read = confirm('Have you read this book? if you have click "OK" if not "Cancel"'); // eslint-disable-line 
-
-  const book = new Book(author, title, pages, read);
-
-  addBookToLibrary(book);
 }
 
 function generateBookHTML(book) {
   const row = document.createElement('tr');
   const bookInfo = Object.values(book);
+
   bookInfo.forEach(property => {
     const column = document.createElement('td');
     column.textContent = property;
@@ -46,6 +37,29 @@ function displayLibrary() {
     containerTable.appendChild(eachBook);
   });
 }
+
+function createBook() {
+  const form = document.forms[0];
+
+  form.onsubmit = function(e) {
+    e.preventDefault();
+
+    const book = new Book();
+
+    book.author = form.elements.author.value;
+    book.title = form.elements.title.value;
+    book.pages = +form.elements.pages.value;
+    book.read = Boolean(form.elements.read.value);
+
+    console.log(book)
+
+    // addBookToLibrary(book);
+  };
+
+  // displayLibrary();
+}
+
+
 
 //function showForm() {
 //  const newBookBtn = document.querySelector(#new_book);
