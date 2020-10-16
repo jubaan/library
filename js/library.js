@@ -19,17 +19,25 @@ function Book(author, title, pages = 0, read = false) {
   this.read = read;
 }
 
+let id = 0;
 
 function generateBookHTML(book) {
   const row = document.createElement('tr');
   const bookInfo = Object.values(book);
 
+  row.setAttribute('data-index', id++);
+  
   bookInfo.forEach(property => {
     const column = document.createElement('td');
     column.textContent = property;
     row.appendChild(column);
   });
-
+  /*
+  //add button to delete
+  deleteBtn = document.createElement('button');
+  deleteBtn.
+  row.appendChild(deleteBtn);
+  */
   return row;
 }
 
