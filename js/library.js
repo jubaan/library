@@ -57,14 +57,17 @@ function addLastBook() {
   containerTable.appendChild(lastBook);
 }
 
-function showForm() { // eslint-disable-line
-  const modalForm = document.querySelector('.modal');
+function resetFields() {
   const form = document.forms[0];
-
   [...form.elements].splice(0, 3).forEach((element) => {
     element.value = null;
   });
+}
 
+function showForm() { // eslint-disable-line
+  const modalForm = document.querySelector('.modal');
+  /*resetFields();
+  const book = new Book();*/
   modalForm.classList.add('modal-active');
 }
 
@@ -72,6 +75,7 @@ function hideForm() {
   const modalForm = document.querySelector('.modal');
 
   modalForm.classList.remove('modal-active');
+  // resetFields();
 }
 
 function listenForHideForm() {
