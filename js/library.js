@@ -19,20 +19,6 @@ function Book(author, title, pages = 0, read = false) {
   this.read = read;
 }
 
-function addBookToLibrary(book) {  
-  switch (true) {
-    case book.title === "":
-      hideForm();
-      return;
-    case book.author === "":
-      book.author = "Anonymous"
-      break;
-  }
-  
-  myLibrary.push(book);
-
-  return myLibrary;
-}
 
 function generateBookHTML(book) {
   const row = document.createElement('tr');
@@ -47,7 +33,7 @@ function generateBookHTML(book) {
   return row;
 }
 
-function displayLibrary() { 
+function displayLibrary() {
   const containerTable = document.querySelector('.library');
   myLibrary.forEach(book => {
     const eachBook = generateBookHTML(book);
@@ -62,20 +48,43 @@ function addLastBook() {
 
   containerTable.appendChild(lastBook);
 }
-function showForm() {
+
+function showForm() { // eslint-disable-line
   const modalForm = document.querySelector('.modal');
+  const form = document.forms[0];
+
+  [...form.elements].splice(0, 3).forEach((element) => {
+    element.value = null;
+  });
+
   modalForm.classList.add('modal-active');
 }
 
 function hideForm() {
   const modalForm = document.querySelector('.modal');
+
   modalForm.classList.remove('modal-active');
 }
 
-function createBook() {
+function addBookToLibrary(book) {
+  switch ('') {
+    case book.title:
+      hideForm();
+      return;
+    case book.author:
+      book.author = 'Anonymous';
+      break;
+    default:
+      break;
+  }
+
+  myLibrary.push(book);
+}
+
+function createBook() { // eslint-disable-line
   const form = document.forms[0];
 
-  form.onsubmit = function(e) {
+  form.onsubmit = (e) => {
     e.preventDefault();
 
     const book = new Book();
@@ -83,7 +92,7 @@ function createBook() {
     book.author = form.elements.author.value;
     book.title = form.elements.title.value;
     book.pages = +form.elements.pages.value;
-    book.read = Boolean(form.elements.read.value);
+    book.read = Boolean(+form.elements.read.value);
 
     addBookToLibrary(book);
     addLastBook();
