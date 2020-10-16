@@ -1,0 +1,12 @@
+.modal {
+  display: none;
+}
+
+.modal-active {
+  position: absolute;
+  min-width: 60%;
+  max-height: calc(100vh - 10rem);
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+}

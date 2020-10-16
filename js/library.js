@@ -28,6 +28,17 @@ function generateBookHTML(book) {
   return row;
 }
 
+
+function addLastBook() {
+  const containerTable = document.querySelector('.library');
+
+  lastBook = generateBookHTML(myLibrary[myLibrary.length - 1]);
+
+  containerTable.appendChild(lastBook);
+
+  console.log(containerTable)
+}
+/*
 function displayLibrary() {
   const containerTable = document.querySelector('.library');
 
@@ -37,6 +48,7 @@ function displayLibrary() {
     containerTable.appendChild(eachBook);
   });
 }
+*/
 
 function createBook() {
   const form = document.forms[0];
@@ -51,17 +63,24 @@ function createBook() {
     book.pages = +form.elements.pages.value;
     book.read = Boolean(form.elements.read.value);
 
-    console.log(book)
-
-    // addBookToLibrary(book);
+    addBookToLibrary(book);
+    addLastBook();
   };
-
-  // displayLibrary();
 }
 
+function showForm() {
+  const modalForm = document.querySelector('.modal');
+  modalForm.classList.add('modal-active');
+}
 
+/*
+function showForm() {
+  const newFormBtn = document.querySelector('#new_book');
+  const modalForm = document.querySelector('.modal');
+  newFormBtn.addEventListener("onclick", () => {
+    modalForm.classList.add('.modal-active');
+  });
+}
+*/
 
-//function showForm() {
-//  const newBookBtn = document.querySelector(#new_book);
-//  newBookBtn.onClick('')
-//}
+// close form func
