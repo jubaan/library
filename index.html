@@ -30,13 +30,17 @@
 
     <form class="modal">
       <div class="input-field">
-        <input class="validate" id="author" type="text" name="author"><br>
+        <input class="validate" id="author" type="text" name="author">
         <label for="author">Author</label>
       </div>
-      <label for="title">Title</label><br>
-      <input class="input-field" id="title" type="text" name="title"><br>
-      <label for="pages">No. of Pages</label><br>
-      <input class="input-field" id="pages" type="text" name="pages"><br>
+      <div class="input-field">
+        <input class="validate" id="title" type="text" name="title">
+        <label for="title">Book title</label>
+      </div>
+      <div class="input-field">
+        <input class="validate" id="pages" type="text" name="pages">
+        <label for="pages">No. of Pages</label>
+      </div>
       <label for="read">Have you read the book?</label><br>
       <label>
         <input id="true" type="radio" name="read" value="true">
@@ -45,9 +49,10 @@
       <label>
         <input id="false" type="radio" name="read" value="false">
         <span>No</span>
-      </label><br>
+      </label>
 
-      <button class="btn waves-effect waves-light" type="submit" onclick="createBook()">Submit</button>
+      <button class="btn waves-effect waves-light top-margin w-100" type="submit" onclick="createBook()">Submit</button>
+      <button class="btn waves-effect red lighten-3 bottom-margin w-100" onclick="hiddeForm()">Cancel</button>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

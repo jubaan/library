@@ -12,7 +12,7 @@
 // }];
 const myLibrary = [];
 
-function Book(author = 'anonymous', title, pages = 0, read = false) {
+function Book(author, title, pages = 0, read = false) {
   this.author = author;
   this.title = title;
   this.pages = pages;
@@ -20,9 +20,32 @@ function Book(author = 'anonymous', title, pages = 0, read = false) {
 }
 
 function addBookToLibrary(book) {
+  if (book.title === ""){
+    hideForm();
+    return;
+  } else if(book.author === "") {
+    book.author = "Anonymous"
+  }
   myLibrary.push(book);
 
   return myLibrary;
+/*switch (expresión) {
+  case valor1:
+    //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
+    [break;]
+  case valor2:
+    //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor2
+    [break;]
+  ...
+  case valorN:
+    //Declaraciones ejecutadas cuando el resultado de expresión coincide con valorN
+    [break;]
+  default:
+    //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+    [break;]
+}
+
+*/  
 }
 
 function generateBookHTML(book) {
@@ -58,9 +81,9 @@ function showForm() {
   modalForm.classList.add('modal-active');
 }
 
-function hiddeForm() {
+function hideForm() {
   const modalForm = document.querySelector('.modal');
-  modalForm.classList.remove('modal-hidden');
+  modalForm.classList.remove('modal-active');
 }
 
 function createBook() {
@@ -78,7 +101,7 @@ function createBook() {
 
     addBookToLibrary(book);
     addLastBook();
-    hiddeForm();
+    hideForm();
   };
 }
 
