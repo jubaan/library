@@ -1,5 +1,15 @@
-// const myLibrary = [{ author: 'julio', title: 'julio',  pages: 35, read: true },
-// { author: 'kitzia', title: 'kitzia', pages: 29, read: true }];
+// const myLibrary = [{
+//   author: 'julio',
+//   title: 'julio',
+//   pages: 35,
+//   read: true,
+// },
+// {
+//   author: 'kitzia',
+//   title: 'kitzia',
+//   pages: 29,
+//   read: true,
+// }];
 const myLibrary = [];
 
 function Book(author = 'anonymous', title, pages = 0, read = false) {
@@ -28,27 +38,30 @@ function generateBookHTML(book) {
   return row;
 }
 
+function displayLibrary() { 
+  const containerTable = document.querySelector('.library');
+  myLibrary.forEach(book => {
+    const eachBook = generateBookHTML(book);
+    containerTable.appendChild(eachBook);
+  });
+}
 
 function addLastBook() {
   const containerTable = document.querySelector('.library');
 
-  lastBook = generateBookHTML(myLibrary[myLibrary.length - 1]);
+  const lastBook = generateBookHTML(myLibrary[myLibrary.length - 1]);
 
   containerTable.appendChild(lastBook);
-
-  console.log(containerTable)
 }
-/*
-function displayLibrary() {
-  const containerTable = document.querySelector('.library');
-
-  myLibrary.forEach(book => {
-    const eachBook = generateBookHTML(book);
-
-    containerTable.appendChild(eachBook);
-  });
+function showForm() {
+  const modalForm = document.querySelector('.modal');
+  modalForm.classList.add('modal-active');
 }
-*/
+
+function hiddeForm() {
+  const modalForm = document.querySelector('.modal');
+  modalForm.classList.remove('modal-hidden');
+}
 
 function createBook() {
   const form = document.forms[0];
@@ -65,22 +78,9 @@ function createBook() {
 
     addBookToLibrary(book);
     addLastBook();
+    hiddeForm();
   };
 }
 
-function showForm() {
-  const modalForm = document.querySelector('.modal');
-  modalForm.classList.add('modal-active');
-}
 
-/*
-function showForm() {
-  const newFormBtn = document.querySelector('#new_book');
-  const modalForm = document.querySelector('.modal');
-  newFormBtn.addEventListener("onclick", () => {
-    modalForm.classList.add('.modal-active');
-  });
-}
-*/
-
-// close form func
+displayLibrary();

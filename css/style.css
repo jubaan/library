@@ -1,12 +1,23 @@
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
 .modal {
   display: none;
+  width: 300px;
+  height: auto;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  padding: 30px;
+  margin: auto;    
 }
 
 .modal-active {
-  position: absolute;
-  min-width: 60%;
-  max-height: calc(100vh - 10rem);
-  top: 5rem;
-  display: flex;
-  flex-direction: column;
+  display: block;
+  /* flex-direction: column; */
 }
