@@ -14,17 +14,19 @@ body {
   left: 0%;
   right: 0%;
   padding: 30px;
-  margin: auto;    
+  margin: auto;
 }
 
 .modal-active {
   display: block;
+
   /* flex-direction: column; */
 }
 
 .top-margin {
   margin: 1rem 0 0.3rem 0;
 }
+
 .bottom-margin {
   margin: 0.3rem 0 1rem 0;
 }
