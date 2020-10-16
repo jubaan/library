@@ -74,6 +74,11 @@ function hideForm() {
   modalForm.classList.remove('modal-active');
 }
 
+function listenForHideForm() {
+  const callingBtn = document.querySelector('.btn-cancel');
+  callingBtn.addEventListener('click', hideForm())
+}
+
 function addBookToLibrary(book) {
   switch ('') {
     case book.title:
