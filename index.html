@@ -43,16 +43,17 @@
       </div>
       <label for="read">Have you read the book?</label><br>
       <label>
-        <input id="true" type="radio" name="read" value="true">
+        <input id="true" type="radio" name="read" value="1">
         <span>Yes</span>
       </label>
       <label>
-        <input id="false" type="radio" name="read" value="false">
+        <input id="false" type="radio" name="read" value="0">
         <span>No</span>
       </label>
 
       <button class="btn waves-effect waves-light top-margin w-100" type="submit" onclick="createBook()">Submit</button>
-      <button class="btn waves-effect red lighten-3 bottom-margin w-100" onclick="hiddeForm()">Cancel</button>
+      <button class="btn waves-effect red lighten-3 bottom-margin w-100"
+        onclick="hideForm()">Cancel</button>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
