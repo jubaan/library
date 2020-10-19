@@ -76,12 +76,18 @@ function showForm() { // eslint-disable-line
   const modalForm = document.querySelector('.modal');
 
   modalForm.classList.add('modal-active');
+  listenForHideForm();
 }
 
 function hideForm() {
   const modalForm = document.querySelector('.modal');
 
   modalForm.classList.remove('modal-active');
+}
+
+function listenForHideForm() {
+  const callingBtn = document.querySelector('.btn-cancel');
+  callingBtn.addEventListener('click', hideForm)
 }
 
 function addBookToLibrary(book) {
