@@ -22,15 +22,13 @@ function Book(author, title, pages = 0, read = false) {
 let id = 0;
 
 
-function createDeleteBtn() {
-  const rows = [...document.querySelectorAll('tbody tr')];
+function createDeleteBtn(row) {
   const deleteButton = document.createElement('button');
+
   deleteButton.textContent = 'Delete';
   deleteButton.classList.add('btn', 'red', 'lighten-3');
 
-  rows.forEach((row) => {
-    row.appendChild(deleteButton);
-  });
+  row.appendChild(deleteButton);
 }
 
 function resetFields() {
@@ -50,6 +48,8 @@ function generateBookHTML(book) {
     column.textContent = property;
     row.appendChild(column);
   });
+
+  createDeleteBtn(row);
 
   return row;
 }
@@ -137,7 +137,6 @@ function displayLibrary() {
   myLibrary.forEach(book => {
     const eachBook = generateBookHTML(book);
     containerTable.appendChild(eachBook);
-    createDeleteBtn();
   });
 }
 
