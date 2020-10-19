@@ -29,6 +29,11 @@ function createDeleteBtn(row) {
   deleteButton.classList.add('btn', 'red', 'lighten-3');
 
   row.appendChild(deleteButton);
+
+  deleteButton.addEventListener('click', () => {
+    const table = document.querySelector('.library-body');
+    table.removeChild(row);
+  });
 }
 
 function resetFields() {
@@ -55,7 +60,7 @@ function generateBookHTML(book) {
 }
 
 function addLastBook() {
-  const containerTable = document.querySelector('.library');
+  const containerTable = document.querySelector('.library-body');
   const lastBook = generateBookHTML(myLibrary[myLibrary.length - 1]);
 
   containerTable.appendChild(lastBook);
@@ -132,7 +137,7 @@ function listenForShowForm() {
 }
 
 function displayLibrary() {
-  const containerTable = document.querySelector('.library tbody');
+  const containerTable = document.querySelector('.library-body');
 
   myLibrary.forEach(book => {
     const eachBook = generateBookHTML(book);
