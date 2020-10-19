@@ -11,6 +11,7 @@ const myLibrary = [{
   read: true,
 }];
 // const myLibrary = [];
+let id = 0;
 
 function Book(author, title, pages = 0, read = false) {
   this.author = author;
@@ -19,8 +20,16 @@ function Book(author, title, pages = 0, read = false) {
   this.read = read;
 }
 
-let id = 0;
-
+function iconizeTrue(row, book) {
+  if (book.read) {
+    const readColumn = row.querySelector(':nth-child(4)');
+    readColumn.classList.add('toggler', 'read-book');
+    const icon = document.createElement('i');
+    icon.classList.add('material-icons');
+    icon.textContent = 'check_circle';
+    readColumn.appendChild(icon);
+  }
+}
 
 function createDeleteBtn(row) {
   const deleteButton = document.createElement('button');
@@ -54,6 +63,7 @@ function generateBookHTML(book) {
     row.appendChild(column);
   });
 
+  iconizeTrue(row, book);
   createDeleteBtn(row);
 
   return row;
