@@ -1,16 +1,16 @@
-// const myLibrary = [{
-//   author: 'julio',
-//   title: 'julio',
-//   pages: 35,
-//   read: true,
-// },
-// {
-//   author: 'kitzia',
-//   title: 'kitzia',
-//   pages: 29,
-//   read: true,
-// }];
-const myLibrary = [];
+const myLibrary = [{
+  author: 'julio',
+  title: 'julio',
+  pages: 35,
+  read: true,
+},
+{
+  author: 'kitzia',
+  title: 'kitzia',
+  pages: 29,
+  read: true,
+}];
+// const myLibrary = [];
 
 function Book(author, title, pages = 0, read = false) {
   this.author = author;
@@ -21,37 +21,46 @@ function Book(author, title, pages = 0, read = false) {
 
 let id = 0;
 
+
+function createDeleteBtn() {
+  const rows = [...document.querySelectorAll('tbody tr')];
+  const deleteButton = document.createElement('button');
+
+  deleteButton.textContent = 'Delete';
+  deleteButton.classList.add('btn', 'red', 'lighten-3');
+
+  rows.forEach((row) => {
+    row.appendChild(deleteButton);
+  });
+}
+
 function generateBookHTML(book) {
   const row = document.createElement('tr');
   const bookInfo = Object.values(book);
 
-  row.setAttribute('data-index', id++);
-  
+  row.setAttribute('data-index', id += 1);
   bookInfo.forEach(property => {
     const column = document.createElement('td');
+
     column.textContent = property;
     row.appendChild(column);
   });
-  /*
-  //add button to delete
-  deleteBtn = document.createElement('button');
-  deleteBtn.
-  row.appendChild(deleteBtn);
-  */
+
   return row;
 }
 
 function displayLibrary() {
-  const containerTable = document.querySelector('.library');
+  const containerTable = document.querySelector('.library tbody');
+
   myLibrary.forEach(book => {
     const eachBook = generateBookHTML(book);
     containerTable.appendChild(eachBook);
+    createDeleteBtn();
   });
 }
 
 function addLastBook() {
   const containerTable = document.querySelector('.library');
-
   const lastBook = generateBookHTML(myLibrary[myLibrary.length - 1]);
 
   containerTable.appendChild(lastBook);
@@ -59,16 +68,13 @@ function addLastBook() {
 
 function resetFields() {
   const form = document.forms[0];
-  [...form.elements].splice(0, 3).forEach((element) => {
-    element.value = null;
-  });
-  // add unchecked attribute to radio buttons
+
+  form.reset();
 }
 
 function showForm() { // eslint-disable-line
   const modalForm = document.querySelector('.modal');
-  /*resetFields();
-  const book = new Book();*/
+
   modalForm.classList.add('modal-active');
 }
 
@@ -76,12 +82,6 @@ function hideForm() {
   const modalForm = document.querySelector('.modal');
 
   modalForm.classList.remove('modal-active');
-  // resetFields();
-}
-
-function listenForHideForm() {
-  const callingBtn = document.querySelector('.btn-cancel');
-  callingBtn.addEventListener('click', hideForm())
 }
 
 function addBookToLibrary(book) {
