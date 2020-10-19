@@ -107,6 +107,12 @@ function createAndSaveBook() { // eslint-disable-line
   };
 }
 
+function listenForCreateAndSaveBook() {
+  const submitBtn = document.querySelector('.btn-submit');
+
+  submitBtn.addEventListener('click', createAndSaveBook);
+}
+
 function listenForHideForm() {
   const callingBtn = document.querySelector('.btn-cancel');
   callingBtn.addEventListener('click', hideForm);
@@ -117,6 +123,7 @@ function showForm() { // eslint-disable-line
 
   modalForm.classList.add('modal-active');
   listenForHideForm();
+  listenForCreateAndSaveBook();
 }
 
 function displayLibrary() {
