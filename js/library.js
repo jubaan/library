@@ -126,6 +126,11 @@ function showForm() { // eslint-disable-line
   listenForCreateAndSaveBook();
 }
 
+function listenForShowForm() {
+  const showBtn = document.querySelector('.btn-show');
+  showBtn.addEventListener('click', showForm);
+}
+
 function displayLibrary() {
   const containerTable = document.querySelector('.library tbody');
 
@@ -137,3 +142,4 @@ function displayLibrary() {
 }
 
 displayLibrary();
+listenForShowForm();
