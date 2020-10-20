@@ -78,7 +78,9 @@ function resetFields() {
 function generateBookHTML(book) {
   const row = document.createElement('tr');
 
-  const {author, title, pages, read} = book;
+  const {
+    author, title, pages, read,
+  } = book;
 
   const bookInfo = [author, title, pages, read];
 
