@@ -146,8 +146,10 @@ function createAndSaveBook() { // eslint-disable-line
     e.preventDefault();
 
     const book = createBook(form);
-    addBookToLibrary(book);
-    addLastBook();
+    if (book.title !== '') {
+      addBookToLibrary(book);
+      addLastBook();
+    }
     hideForm();
     resetFields();
   };
