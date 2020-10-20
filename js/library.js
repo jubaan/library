@@ -1,5 +1,4 @@
 const myLibrary = [];
-let id = 0;
 
 function Book(author, title, pages = 0, read = false) {
   this.author = author;
@@ -84,7 +83,6 @@ function generateBookHTML(book) {
 
   const bookInfo = [author, title, pages, read];
 
-  row.setAttribute('data-index', id += 1);
   bookInfo.forEach(property => {
     const column = document.createElement('td');
 
