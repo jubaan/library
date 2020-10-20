@@ -77,7 +77,10 @@ function resetFields() {
 
 function generateBookHTML(book) {
   const row = document.createElement('tr');
-  const bookInfo = Object.values(book);
+
+  const {author, title, pages, read} = book;
+
+  const bookInfo = [author, title, pages, read];
 
   row.setAttribute('data-index', id += 1);
   bookInfo.forEach(property => {
