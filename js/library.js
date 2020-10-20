@@ -1,16 +1,4 @@
-const myLibrary = [{
-  author: 'julio',
-  title: 'julio',
-  pages: 35,
-  read: true,
-},
-{
-  author: 'kitzia',
-  title: 'kitzia',
-  pages: 29,
-  read: false,
-}];
-// const myLibrary = [];
+const myLibrary = [];
 let id = 0;
 
 function Book(author, title, pages = 0, read = false) {
@@ -20,23 +8,45 @@ function Book(author, title, pages = 0, read = false) {
   this.read = read;
 }
 
+function toggler(buttonIcon, icon, book, readColumn) {
+  buttonIcon.addEventListener('click', () => {
+    if (book.read) {
+      buttonIcon.classList.add('waves-effect', 'waves-light', 'red', 'accent-2', 'btn');
+      buttonIcon.classList.remove('green');
+      buttonIcon.textContent = 'Not read';
+      icon.textContent = 'cancel';
+      book.read = false;
+    } else {
+      buttonIcon.classList.add('waves-effect', 'waves-light', 'green', 'btn');
+      buttonIcon.classList.remove('red', 'accent-2');
+      buttonIcon.textContent = 'Read';
+      icon.textContent = 'check_circle';
+      book.read = true;
+    }
+    buttonIcon.appendChild(icon);
+    readColumn.appendChild(buttonIcon);
+  });
+}
+
 function iconize(readColumn, book) {
   const buttonIcon = document.createElement('a');
-  
+
   const icon = document.createElement('i');
   icon.classList.add('material-icons', 'right');
-  
+
   if (book.read) {
-    buttonIcon.classList.add('waves-effect', 'waves-light', 'btn');
+    buttonIcon.classList.add('waves-effect', 'waves-light', 'green', 'btn');
     buttonIcon.textContent = 'Read';
     icon.textContent = 'check_circle';
   } else {
     buttonIcon.classList.add('waves-effect', 'waves-light', 'red', 'accent-2', 'btn');
-    buttonIcon.textContent = 'Not read';  
+    buttonIcon.textContent = 'Not read';
     icon.textContent = 'cancel';
   }
   buttonIcon.appendChild(icon);
   readColumn.appendChild(buttonIcon);
+
+  toggler(buttonIcon, icon, book, readColumn);
 }
 
 function createDeleteBtn(row) {
@@ -44,7 +54,7 @@ function createDeleteBtn(row) {
   const column = document.createElement('td');
   deleteButton.textContent = 'Delete';
   deleteButton.classList.add('btn', 'red', 'lighten-3', 'waves-effect', 'waves-light');
-  
+
   column.appendChild(deleteButton);
   row.appendChild(column);
 
@@ -68,13 +78,12 @@ function generateBookHTML(book) {
   bookInfo.forEach(property => {
     const column = document.createElement('td');
 
-    if (property !== true && property !== false ) {
+    if (property !== true && property !== false) {
       column.textContent = property;
     }
     row.appendChild(column);
   });
   const readColumn = row.querySelector(':nth-child(4)');
-  readColumn.classList.add('no-read-book');
   iconize(readColumn, book);
   createDeleteBtn(row);
 
