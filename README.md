@@ -55,6 +55,7 @@ The project was developed using the following technologies:
 To have a local copy up and running follow the next steps:
 
 1- `git clone git clone git@github.com:jubaan/library.git`
+
 2- Open `index.html` in your preferred browser.
 
 ## Roadmap
