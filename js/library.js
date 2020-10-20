@@ -8,20 +8,28 @@ function Book(author, title, pages = 0, read = false) {
   this.read = read;
 }
 
+function notReadStyling(buttonIcon, icon, book) {
+  buttonIcon.classList.add('waves-effect', 'waves-light', 'red', 'accent-2', 'btn');
+  buttonIcon.classList.remove('green');
+  buttonIcon.textContent = 'Not read';
+  icon.textContent = 'cancel';
+  book.read = false;
+}
+
+function readStyling(buttonIcon, icon, book) {
+  buttonIcon.classList.add('waves-effect', 'waves-light', 'green', 'btn');
+  buttonIcon.classList.remove('red', 'accent-2');
+  buttonIcon.textContent = 'Read';
+  icon.textContent = 'check_circle';
+  book.read = true;
+}
+
 function toggler(buttonIcon, icon, book, readColumn) {
   buttonIcon.addEventListener('click', () => {
     if (book.read) {
-      buttonIcon.classList.add('waves-effect', 'waves-light', 'red', 'accent-2', 'btn');
-      buttonIcon.classList.remove('green');
-      buttonIcon.textContent = 'Not read';
-      icon.textContent = 'cancel';
-      book.read = false;
+      notReadStyling(buttonIcon, icon, book);
     } else {
-      buttonIcon.classList.add('waves-effect', 'waves-light', 'green', 'btn');
-      buttonIcon.classList.remove('red', 'accent-2');
-      buttonIcon.textContent = 'Read';
-      icon.textContent = 'check_circle';
-      book.read = true;
+      readStyling(buttonIcon, icon, book);
     }
     buttonIcon.appendChild(icon);
     readColumn.appendChild(buttonIcon);
@@ -30,19 +38,16 @@ function toggler(buttonIcon, icon, book, readColumn) {
 
 function iconize(readColumn, book) {
   const buttonIcon = document.createElement('a');
-
   const icon = document.createElement('i');
+
   icon.classList.add('material-icons', 'right');
 
   if (book.read) {
-    buttonIcon.classList.add('waves-effect', 'waves-light', 'green', 'btn');
-    buttonIcon.textContent = 'Read';
-    icon.textContent = 'check_circle';
+    readStyling(buttonIcon, icon, book);
   } else {
-    buttonIcon.classList.add('waves-effect', 'waves-light', 'red', 'accent-2', 'btn');
-    buttonIcon.textContent = 'Not read';
-    icon.textContent = 'cancel';
+    notReadStyling(buttonIcon, icon, book);
   }
+
   buttonIcon.appendChild(icon);
   readColumn.appendChild(buttonIcon);
 
@@ -83,7 +88,9 @@ function generateBookHTML(book) {
     }
     row.appendChild(column);
   });
+
   const readColumn = row.querySelector(':nth-child(4)');
+
   iconize(readColumn, book);
   createDeleteBtn(row);
 
