@@ -179,7 +179,7 @@ function listenForShowForm() {
   showBtn.addEventListener('click', showForm);
 }
 
-function displayLibrary() {
+function render() {
   const containerTable = document.querySelector('.library-body');
 
   myLibrary.forEach(book => {
@@ -188,5 +188,5 @@ function displayLibrary() {
   });
 }
 
-displayLibrary();
+render();
 listenForShowForm();
