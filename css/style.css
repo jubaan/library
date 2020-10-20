@@ -6,7 +6,7 @@ body {
 
 header,
 main {
-  width: 600px;
+  width: 80vw;
   margin: 50px auto;
 }
 
@@ -53,4 +53,8 @@ h1 {
 
 .read-book {
   color: green;
+}
+
+.btn {
+  width: 10rem;
 }

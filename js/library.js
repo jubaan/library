@@ -8,7 +8,7 @@ const myLibrary = [{
   author: 'kitzia',
   title: 'kitzia',
   pages: 29,
-  read: true,
+  read: false,
 }];
 // const myLibrary = [];
 let id = 0;
@@ -20,24 +20,33 @@ function Book(author, title, pages = 0, read = false) {
   this.read = read;
 }
 
-function iconizeTrue(row, book) {
+function iconize(readColumn, book) {
+  const buttonIcon = document.createElement('a');
+  
+  const icon = document.createElement('i');
+  icon.classList.add('material-icons', 'right');
+  
   if (book.read) {
-    const readColumn = row.querySelector(':nth-child(4)');
-    readColumn.classList.add('toggler', 'read-book');
-    const icon = document.createElement('i');
-    icon.classList.add('material-icons');
+    buttonIcon.classList.add('waves-effect', 'waves-light', 'btn');
+    buttonIcon.textContent = 'Read';
     icon.textContent = 'check_circle';
-    readColumn.appendChild(icon);
+  } else {
+    buttonIcon.classList.add('waves-effect', 'waves-light', 'red', 'accent-2', 'btn');
+    buttonIcon.textContent = 'Not read';  
+    icon.textContent = 'cancel';
   }
+  buttonIcon.appendChild(icon);
+  readColumn.appendChild(buttonIcon);
 }
 
 function createDeleteBtn(row) {
-  const deleteButton = document.createElement('button');
-
+  const deleteButton = document.createElement('a');
+  const column = document.createElement('td');
   deleteButton.textContent = 'Delete';
-  deleteButton.classList.add('btn', 'red', 'lighten-3');
-
-  row.appendChild(deleteButton);
+  deleteButton.classList.add('btn', 'red', 'lighten-3', 'waves-effect', 'waves-light');
+  
+  column.appendChild(deleteButton);
+  row.appendChild(column);
 
   deleteButton.addEventListener('click', () => {
     const table = document.querySelector('.library-body');
@@ -59,11 +68,14 @@ function generateBookHTML(book) {
   bookInfo.forEach(property => {
     const column = document.createElement('td');
 
-    column.textContent = property;
+    if (property !== true && property !== false ) {
+      column.textContent = property;
+    }
     row.appendChild(column);
   });
-
-  iconizeTrue(row, book);
+  const readColumn = row.querySelector(':nth-child(4)');
+  readColumn.classList.add('no-read-book');
+  iconize(readColumn, book);
   createDeleteBtn(row);
 
   return row;
