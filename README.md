@@ -34,7 +34,7 @@
 
 ## About The Project
 <em>Click on the image to visit the live version!</em>
-[![Product Name Screen Shot][product-screenshot]](https://raw.githack.com/jubaan/library/library/index.html)
+[![Product Name Screen Shot][product-screenshot]](https://raw.githack.com/jubaan/library/main/index.html)
 
 The Library project includes funtionality as:
  - Adding/Removing Books.
