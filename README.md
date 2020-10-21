@@ -15,7 +15,7 @@
     <a href="https://github.com/jubaan/library"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://raw.githack.com/jubaan/library/library/index.html">View Demo</a>
+    <a href="https://raw.githack.com/jubaan/library/main/index.html">View Demo</a>
     ·
     <a href="https://github.com/jubaan/library/issues">Report Bug</a>
     ·
