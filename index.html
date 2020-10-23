@@ -17,7 +17,7 @@
       <h1>My Library</h1>
     </header>
     <main>
-      <button class="btn btn-show waves-effect waves-light" id="new_book">NEW BOOK</button>
+      <button class="btn btnShowForm waves-effect waves-light" id="new_book">NEW BOOK</button>
       <table class = "library striped">
         <col class="w-25">
         <col class="w-25">
@@ -33,7 +33,7 @@
             <th>Delete Book</th>
           </tr>
         </thead>
-        <tbody class="library-body">
+        <tbody class="books-section">
         </tbody>
       </table>
     </main>
@@ -61,9 +61,29 @@
         <span>No</span>
       </label>
 
-      <button class="btn btn-submit waves-effect waves-light top-margin w-100" type="submit">Submit</button>
-      <button class="btn btn-cancel waves-effect red lighten-3 bottom-margin w-100" type="reset">Cancel</button>
+      <button class="btn btnSaveBook waves-effect waves-light top-margin w-100"
+        type="submit">Save</button>
+      <button class="btn btnHideForm waves-effect red lighten-3 bottom-margin w-100" type="reset">Cancel</button>
     </form>
+
+    <template id="bookRowTemplate">
+      <tr>
+        <td class="author"></td>
+        <td class="title"></td>
+        <td class="pages"></td>
+        <td class="read">
+          <a class="btn lighten-2 waves-effect waves-light btnDeleteBook">
+            <i class="material-icons right"></i>
+            Not Read
+          </a>
+        </td>
+        <td class="delete">
+          <a class="btn lighten-2 waves-effect waves-light btnDeleteBook">
+            <i class="material-icons right"></i>
+          </a>
+        </td>
+      </tr>
+    </template>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/library.js"></script>
