@@ -190,6 +190,7 @@ const libraryModule = ((doc) => {
   }
 
   return {
+    myLibrary,
     displayLibrary,
     listenForShowForm,
   };
