@@ -15,7 +15,9 @@ const libraryModule = ((doc) => {
 
 
   function Book(author, title, pages = 0, read = false) {
-    return { author, title, pages, read };
+    return {
+      author, title, pages, read,
+    };
   }
 
   function resetFields() {
@@ -35,7 +37,7 @@ const libraryModule = ((doc) => {
 
     deleteButton.addEventListener('click', () => {
       const bookIndexToDelete = row.getAttribute('data-index') - 1;
-      myLibrary.splice(bookIndexToDelete,1);
+      myLibrary.splice(bookIndexToDelete, 1);
       containerTable.removeChild(row);
     });
   }
