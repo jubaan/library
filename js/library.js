@@ -1,11 +1,17 @@
 const documentMock = (() => ({
-  querySelector: (selector) => ({
+  querySelector: (selector) => ({ // eslint-disable-line
     innerHTML: null,
   }),
 }))();
 
 const libraryModule = ((doc) => {
   const myLibrary = [];
+  const containerTable = doc.querySelector('.library-body');
+  const modalForm = doc.querySelector('.modal');
+  const submitBtn = doc.querySelector('.btn-submit');
+  const callingBtn = doc.querySelector('.btn-cancel');
+  const showBtn = doc.querySelector('.btn-show');
+
 
   function Book(author, title, pages = 0, read = false) {
     this.author = author;
@@ -30,8 +36,7 @@ const libraryModule = ((doc) => {
     row.appendChild(column);
 
     deleteButton.addEventListener('click', () => {
-      const table = doc.querySelector('.library-body');
-      table.removeChild(row);
+      containerTable.removeChild(row);
     });
   }
 
@@ -108,15 +113,12 @@ const libraryModule = ((doc) => {
   }
 
   function addLastBook() {
-    const containerTable = doc.querySelector('.library-body');
     const lastBook = generateBookHTML(myLibrary[myLibrary.length - 1]);
 
     containerTable.appendChild(lastBook);
   }
 
   function hideForm() {
-    const modalForm = doc.querySelector('.modal');
-
     modalForm.classList.remove('modal-active');
   }
 
@@ -163,32 +165,24 @@ const libraryModule = ((doc) => {
   }
 
   function listenForCreateAndSaveBook() {
-    const submitBtn = doc.querySelector('.btn-submit');
-
     submitBtn.addEventListener('click', createAndSaveBook);
   }
 
   function listenForHideForm() {
-    const callingBtn = doc.querySelector('.btn-cancel');
     callingBtn.addEventListener('click', hideForm);
   }
 
   function showForm() {
-    const modalForm = doc.querySelector('.modal');
-
     modalForm.classList.add('modal-active');
     listenForHideForm();
     listenForCreateAndSaveBook();
   }
 
   function listenForShowForm() {
-    const showBtn = doc.querySelector('.btn-show');
     showBtn.addEventListener('click', showForm);
   }
 
   function displayLibrary() {
-    const containerTable = doc.querySelector('.library-body');
-
     myLibrary.forEach(book => {
       const eachBook = generateBookHTML(book);
       containerTable.appendChild(eachBook);
