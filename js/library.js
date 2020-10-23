@@ -6,6 +6,7 @@ const documentMock = (() => ({
 
 const libraryModule = ((doc) => {
   const myLibrary = [];
+  let id = 0;
   const containerTable = doc.querySelector('.library-body');
   const modalForm = doc.querySelector('.modal');
   const submitBtn = doc.querySelector('.btn-submit');
@@ -14,10 +15,7 @@ const libraryModule = ((doc) => {
 
 
   function Book(author, title, pages = 0, read = false) {
-    this.author = author;
-    this.title = title;
-    this.pages = pages;
-    this.read = read;
+    return { author, title, pages, read };
   }
 
   function resetFields() {
@@ -36,6 +34,8 @@ const libraryModule = ((doc) => {
     row.appendChild(column);
 
     deleteButton.addEventListener('click', () => {
+      const bookIndexToDelete = row.getAttribute('data-index') - 1;
+      myLibrary.splice(bookIndexToDelete,1);
       containerTable.removeChild(row);
     });
   }
@@ -95,6 +95,7 @@ const libraryModule = ((doc) => {
 
     const bookInfo = [author, title, pages, read];
 
+    row.setAttribute('data-index', id += 1);
     bookInfo.forEach(property => {
       const column = doc.createElement('td');
 
