@@ -1,4 +1,24 @@
-const myLibrary = [];
+var libraryModule = (function() {
+  const myLibrary = [];
+  
+  let
+  let
+
+  function _names(){
+
+  }
+
+  function names(){
+    
+  }
+
+  return {
+    public_methods: public_methods,
+    other: other
+  };
+})();
+
+libraryModule.publicMethod();
 
 function Book(author, title, pages = 0, read = false) {
   this.author = author;
