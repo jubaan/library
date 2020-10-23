@@ -1,4 +1,10 @@
-const libraryModule = (() => {
+const documentMock = (() => ({
+  querySelector: (selector) => ({
+    innerHTML: null,
+  }),
+}))();
+
+const libraryModule = ((doc) => {
   const myLibrary = [];
 
   function Book(author, title, pages = 0, read = false) {
@@ -9,14 +15,14 @@ const libraryModule = (() => {
   }
 
   function resetFields() {
-    const form = document.forms[0];
+    const form = doc.forms[0];
 
     form.reset();
   }
 
   function createDeleteBtn(row) {
-    const deleteButton = document.createElement('a');
-    const column = document.createElement('td');
+    const deleteButton = doc.createElement('a');
+    const column = doc.createElement('td');
     deleteButton.textContent = 'Delete';
     deleteButton.classList.add('btn', 'red', 'lighten-3', 'waves-effect', 'waves-light');
 
@@ -24,7 +30,7 @@ const libraryModule = (() => {
     row.appendChild(column);
 
     deleteButton.addEventListener('click', () => {
-      const table = document.querySelector('.library-body');
+      const table = doc.querySelector('.library-body');
       table.removeChild(row);
     });
   }
@@ -58,8 +64,8 @@ const libraryModule = (() => {
   }
 
   function iconize(readColumn, book) {
-    const buttonIcon = document.createElement('a');
-    const icon = document.createElement('i');
+    const buttonIcon = doc.createElement('a');
+    const icon = doc.createElement('i');
 
     icon.classList.add('material-icons', 'right');
 
@@ -76,7 +82,7 @@ const libraryModule = (() => {
   }
 
   function generateBookHTML(book) {
-    const row = document.createElement('tr');
+    const row = doc.createElement('tr');
 
     const {
       author, title, pages, read,
@@ -85,7 +91,7 @@ const libraryModule = (() => {
     const bookInfo = [author, title, pages, read];
 
     bookInfo.forEach(property => {
-      const column = document.createElement('td');
+      const column = doc.createElement('td');
 
       if (property !== true && property !== false) {
         column.textContent = property;
@@ -102,14 +108,14 @@ const libraryModule = (() => {
   }
 
   function addLastBook() {
-    const containerTable = document.querySelector('.library-body');
+    const containerTable = doc.querySelector('.library-body');
     const lastBook = generateBookHTML(myLibrary[myLibrary.length - 1]);
 
     containerTable.appendChild(lastBook);
   }
 
   function hideForm() {
-    const modalForm = document.querySelector('.modal');
+    const modalForm = doc.querySelector('.modal');
 
     modalForm.classList.remove('modal-active');
   }
@@ -140,8 +146,8 @@ const libraryModule = (() => {
     return book;
   }
 
-  function createAndSaveBook() { // eslint-disable-line
-    const form = document.forms[0];
+  function createAndSaveBook() {
+    const form = doc.forms[0];
 
     form.onsubmit = (e) => {
       e.preventDefault();
@@ -157,18 +163,18 @@ const libraryModule = (() => {
   }
 
   function listenForCreateAndSaveBook() {
-    const submitBtn = document.querySelector('.btn-submit');
+    const submitBtn = doc.querySelector('.btn-submit');
 
     submitBtn.addEventListener('click', createAndSaveBook);
   }
 
   function listenForHideForm() {
-    const callingBtn = document.querySelector('.btn-cancel');
+    const callingBtn = doc.querySelector('.btn-cancel');
     callingBtn.addEventListener('click', hideForm);
   }
 
-  function showForm() { // eslint-disable-line
-    const modalForm = document.querySelector('.modal');
+  function showForm() {
+    const modalForm = doc.querySelector('.modal');
 
     modalForm.classList.add('modal-active');
     listenForHideForm();
@@ -176,12 +182,12 @@ const libraryModule = (() => {
   }
 
   function listenForShowForm() {
-    const showBtn = document.querySelector('.btn-show');
+    const showBtn = doc.querySelector('.btn-show');
     showBtn.addEventListener('click', showForm);
   }
 
   function displayLibrary() {
-    const containerTable = document.querySelector('.library-body');
+    const containerTable = doc.querySelector('.library-body');
 
     myLibrary.forEach(book => {
       const eachBook = generateBookHTML(book);
@@ -193,7 +199,7 @@ const libraryModule = (() => {
     displayLibrary,
     listenForShowForm,
   };
-})();
+})(document || documentMock);
 
 libraryModule.displayLibrary();
 
