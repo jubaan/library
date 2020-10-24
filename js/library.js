@@ -1,90 +1,100 @@
-const myLibraryModule = (function() {
+'user strict';
+
+const myLibraryModule = (() => {
   const myLibrary = [];
   const form = document.forms[0];
   const table = document.querySelector('.books-section');
+  let dataIndex = 0;
 
   const bookRowTemplate = document.querySelector('#bookRowTemplate');
-  const row = bookRowTemplate.content.cloneNode(true);
-  const column = row.querySelectorAll('td');
 
-  const btnSaveBook = document.querySelector('.btnSaveBook');
-  const btnDeleteBook = document.querySelector('.btnDeleteBook');
-  const btnToggleRead = document.querySelector('.btnToggleRead');
   const btnShowForm = document.querySelector('.btnShowForm');
   const btnHideForm = document.querySelector('.btnHideForm');
 
-  function Book () {
+  function Book() {
     this.author = form.elements.author.value;
     this.title = form.elements.title.value;
     this.pages = +form.elements.pages.value;
     this.read = +form.elements.read.value;
+  }
 
-    return book;
+  const hideForm = () => {
+    form.classList.remove('modal-active');
   };
 
-  const showForm = () => {
-    btnShowForm.addEventListener('click', () => {
-      form.classList.add('modal-active');
-      form.reset();
+  const closeForm = () => {
+    btnHideForm.addEventListener('click', () => {
       hideForm();
     });
   };
 
-  const hideForm = () => {
-    btnHideForm.addEventListener('click', () => {
-      form.classList.remove('modal-active');
+  const deleteBook = (row) => {
+    const btnDeleteBook = row.querySelector('.btnDeleteBook');
+
+    btnDeleteBook.addEventListener('click', (row) => {
+      // table.removeChild((e.target.parentElement).parentElement)
+      table.deleteRow(row);
+      table.remove(row.firstElementChild);
     });
   };
 
-  const createBook = () => {
-    const book = new Book();
+  // const toggler = (row) => {
+  //   const btnToggler = row.querySelector(.btnToggler)
 
-    return book;
-  }
+  //   btnToggler.addEventListener('click', () => {
+  //     if (row.elements.value) {
+  //       notReadStyling(buttonIcon, icon, book);
+  //     } else {
+  //       readStyling(buttonIcon, icon, book);
+  //     }
+  //     buttonIcon.appendChild(icon);
+  //     readColumn.appendChild(buttonIcon);
+  //   });
+  // };
 
-  const deleteBook = () => {
-    btnDelete.addEventListener('click', () => {
-      table.removeChild(row);
-    });
-  };
+  const createRow = (book) => {
+    const row = bookRowTemplate.content.cloneNode(true);
+    const column = row.querySelectorAll('td');
 
-  const createRow = () => {
-    createBook();
+    row.firstElementChild.setAttribute('data-index', dataIndex += 1);
 
     column[0].textContent = book.author;
     column[1].textContent = book.title;
     column[2].textContent = book.pages;
-    column[3].textContent = book.read;
-    column[3].appendChild(btnDelete);
+    deleteBook(row);
 
     table.appendChild(row);
   };
-// function addBookToLibrary(book) {
-//   switch ('') {
-//     case book.title:
-//       hideForm();
-//       return;
-//     case book.author:
-//       book.author = 'Anonymous';
-//       break;
-//     default:
-//       break;
-//   }
 
-/
-  const renderRow = () => {
-    switch ('') {
-      case book.title:
-      case book.author:
-        form.reset();
-    }
+  const saveBook = () => {
+    form.onsubmit = (e) => {
+      e.preventDefault();
 
+      const book = new Book();
+
+      if (book.title !== '') {
+        myLibrary.push(book);
+        createRow(book);
+      }
+
+      hideForm();
+    };
   };
 
-  return { showForm };
+  const openForm = () => {
+    btnShowForm.addEventListener('click', () => {
+      form.classList.add('modal-active');
+      form.reset();
+      saveBook();
+      closeForm();
+    });
+  };
+
+
+  return { openForm, myLibrary };
 })();
 
-myLibraryModule.showForm();
+myLibraryModule.openForm();
 
 // myLibraryModule.renderBook(book);
 
@@ -111,7 +121,7 @@ myLibraryModule.showForm();
 //   buttonIcon.textContent = 'Read';
 //   icon.textContent = 'check_circle';
 //   book.read = true;
-// }
+/// }
 
 // function toggler(buttonIcon, icon, book, readColumn) {
 //   buttonIcon.addEventListener('click', () => {
@@ -218,16 +228,16 @@ myLibraryModule.showForm();
 //   myLibrary.push(book);
 // }
 
-// // function createBook(form) {
-// //   const book = new Book();
+// function createBook(form) {
+//   const book = new Book();
 
-// //   book.author = form.elements.author.value;
-// //   book.title = form.elements.title.value;
-// //   book.pages = +form.elements.pages.value;
-// //   book.read = Boolean(+form.elements.read.value);
+//   book.author = form.elements.author.value;
+//   book.title = form.elements.title.value;
+//   book.pages = +form.elements.pages.value;
+//   book.read = Boolean(+form.elements.read.value);
 
-// //   return book;
-// // }
+//   return book;
+// }
 
 // function createAndSaveBook() { // eslint-disable-line
 //   const form = document.forms[0];

@@ -17,7 +17,10 @@
       <h1>My Library</h1>
     </header>
     <main>
-      <button class="btn btnShowForm waves-effect waves-light" id="new_book">NEW BOOK</button>
+      <a class="btn btnShowForm blue accent-4 waves-effect waves-light">
+        <i class="material-icons right">add_box</i>
+        Add new book
+      </a>
       <table class = "library striped">
         <col class="w-25">
         <col class="w-25">
@@ -53,17 +56,17 @@
       </div>
       <label for="read">Have you read the book?</label><br>
       <label>
-        <input id="true" type="radio" name="read" value="1">
+        <input class="with-gap" id="true" type="radio" name="read" value="1">
         <span>Yes</span>
       </label>
       <label>
-        <input id="false" type="radio" name="read" value="0">
+        <input class="with-gap" id="false" type="radio" name="read" value="0" checked>
         <span>No</span>
       </label>
 
-      <button class="btn btnSaveBook waves-effect waves-light top-margin w-100"
+      <button class="btn green waves-effect waves-light top-margin w-100"
         type="submit">Save</button>
-      <button class="btn btnHideForm waves-effect red lighten-3 bottom-margin w-100" type="reset">Cancel</button>
+      <button class="btn btnHideForm waves-effect red bottom-margin w-100" type="reset">Cancel</button>
     </form>
 
     <template id="bookRowTemplate">
@@ -72,14 +75,15 @@
         <td class="title"></td>
         <td class="pages"></td>
         <td class="read">
-          <a class="btn lighten-2 waves-effect waves-light btnDeleteBook">
+          <a class="btn blue accent-2 waves-effect waves-light btnToggler">
             <i class="material-icons right"></i>
             Not Read
           </a>
         </td>
         <td class="delete">
-          <a class="btn lighten-2 waves-effect waves-light btnDeleteBook">
+          <a class="btn red waves-effect waves-light btnDeleteBook">
             <i class="material-icons right"></i>
+            Delete
           </a>
         </td>
       </tr>
