@@ -30,27 +30,52 @@ const myLibraryModule = (() => {
 
   const deleteBook = (row) => {
     const btnDeleteBook = row.querySelector('.btnDeleteBook');
+    const index = row.firstElementChild.getAttribute('data-index').value;
 
     btnDeleteBook.addEventListener('click', (row) => {
-      // table.removeChild((e.target.parentElement).parentElement)
       table.deleteRow(row);
-      table.remove(row.firstElementChild);
+      myLibrary.splice(index, 1);
+      dataIndex -= 1;
     });
   };
 
-  // const toggler = (row) => {
-  //   const btnToggler = row.querySelector(.btnToggler)
+  // function styleNotRead(buttonIcon, icon, book) {
+  //   buttonIcon.classList.add('red', 'accent-2');
+  //   buttonIcon.classList.remove('green');
+  //   buttonIcon.textContent = 'Not read';
+  //   icon.textContent = 'cancel';
+  //   book.read = false;
+  // }
 
-  //   btnToggler.addEventListener('click', () => {
-  //     if (row.elements.value) {
-  //       notReadStyling(buttonIcon, icon, book);
-  //     } else {
-  //       readStyling(buttonIcon, icon, book);
-  //     }
-  //     buttonIcon.appendChild(icon);
-  //     readColumn.appendChild(buttonIcon);
-  //   });
-  // };
+  // function styleRead(buttonIcon, icon, book) {
+  //   buttonIcon.classList.add('green');
+  //   buttonIcon.classList.remove('red', 'accent-2');
+  //   buttonIcon.textContent = 'Read';
+  //   icon.textContent = 'check_circle';
+  //   book.read = true;
+  // }
+
+  const toggler = (row) => {
+    const btnToggler = row.querySelector('.btnToggler');
+    const index = row.getAttribute('data-index').value;
+    const icon = row.firstElementChild.querySelector('i');
+
+    btnToggler.addEventListener('click', () => {
+      if (btnToggler.textContent === 'Not read') {
+        btnToggler.classList.remove('red');
+        btnToggler.classList.add('green');
+        btnToggler.textContent = 'Read';
+        icon.textContent = 'check_circle';
+        myLibrary[index].read = true;
+      } else {
+        btnToggler.classList.remove('green');
+        btnToggler.classList.add('red');
+        btnToggler.textContent = 'Not Read';
+        icon.textContent = 'cancel';
+        myLibrary[index].read = false;
+      }
+    });
+  };
 
   const createRow = (book) => {
     const row = bookRowTemplate.content.cloneNode(true);
@@ -61,6 +86,7 @@ const myLibraryModule = (() => {
     column[0].textContent = book.author;
     column[1].textContent = book.title;
     column[2].textContent = book.pages;
+    // toggler(row);
     deleteBook(row);
 
     table.appendChild(row);
